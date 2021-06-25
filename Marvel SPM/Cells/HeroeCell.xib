@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="HeroeCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeroeCell" rowHeight="103" id="KGk-i7-Jjw" customClass="HeroeCell" customModule="Marvel_SPM" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="518" height="103"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="518" height="103"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t6z-vE-vCn">
+                        <rect key="frame" x="10" y="10" width="83" height="83"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="t6z-vE-vCn" secondAttribute="height" multiplier="1:1" id="WHF-ta-Eyq"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heroe name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGV-0o-1df">
+                        <rect key="frame" x="103" y="15" width="395" height="24"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Misc stuff" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lnj-0L-PhQ">
+                        <rect key="frame" x="103" y="44" width="395" height="31"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qGV-0o-1df" firstAttribute="top" secondItem="t6z-vE-vCn" secondAttribute="top" constant="5" id="5r2-ln-Tad"/>
+                    <constraint firstItem="t6z-vE-vCn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="5ru-tr-cpx"/>
+                    <constraint firstItem="qGV-0o-1df" firstAttribute="leading" secondItem="t6z-vE-vCn" secondAttribute="trailing" constant="10" id="RRa-2O-9lf"/>
+                    <constraint firstItem="Lnj-0L-PhQ" firstAttribute="leading" secondItem="t6z-vE-vCn" secondAttribute="trailing" constant="10" id="SmC-zo-S8l"/>
+                    <constraint firstAttribute="trailing" secondItem="Lnj-0L-PhQ" secondAttribute="trailing" constant="20" id="T9P-JA-TXW"/>
+                    <constraint firstItem="Lnj-0L-PhQ" firstAttribute="top" secondItem="qGV-0o-1df" secondAttribute="bottom" constant="5" id="Xyx-t1-XRK"/>
+                    <constraint firstAttribute="bottom" secondItem="t6z-vE-vCn" secondAttribute="bottom" constant="10" id="kUu-yy-cbt"/>
+                    <constraint firstItem="Lnj-0L-PhQ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.3" id="tgM-7b-D0B"/>
+                    <constraint firstAttribute="trailing" secondItem="qGV-0o-1df" secondAttribute="trailing" constant="20" id="vwf-g0-swq"/>
+                    <constraint firstItem="t6z-vE-vCn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="w2L-am-ybK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="heroImage" destination="t6z-vE-vCn" id="XWT-gE-kfV"/>
+                <outlet property="miscText" destination="Lnj-0L-PhQ" id="fTr-yk-lEM"/>
+                <outlet property="nameText" destination="qGV-0o-1df" id="kzp-FB-ZQk"/>
+            </connections>
+            <point key="canvasLocation" x="275.36231884057975" y="133.59375"/>
+        </tableViewCell>
+    </objects>
+</document>
