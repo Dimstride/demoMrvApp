@@ -33,5 +33,6 @@ class HeroeCell: UITableViewCell {
     private func setImage(heroImage: UIImageView, data: CharacterResult) {
         self.heroImage.layer.cornerRadius = 10
         self.heroImage.kf.setImage(with: URL(string: goodURL(url: data.thumbnail?.path, format: data.thumbnail?.thumbExtension)))
+        //print(goodURL(url: data.thumbnail?.path, format: data.thumbnail?.thumbExtension))
     }
 }

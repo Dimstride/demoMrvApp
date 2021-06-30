@@ -8,6 +8,7 @@ class ViewController: UIViewController {
     var misCells: MCell = MCell(xibName: "HeroeCell", idReuse: "HeroeCell")
     var loadingCell: MCell = MCell(xibName: "LoadingCell", idReuse: "LoadingCell")
     var heroes: [CharacterResult] = []
+    var provider: String? = nil
     var isLoading = false
     var offset = 0
     var clickedRow = 0
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
         if (segue.identifier == "CharacterView") {
             let viewController = segue.destination as? CharacterView
             viewController!.character = self.heroes[clickedRow]
+            viewController!.provider = self.provider
         }
     }
 }
@@ -37,10 +39,11 @@ private extension ViewController {
         NetworkClient().getCharacters(offset: offset) { result in
             switch result {
             case .success(let characters):
+                self.provider = characters.attributionText
                 guard let securedResults = characters.data?.results else { return }
                 self.offset += securedResults.count
                 self.heroes.append(contentsOf: securedResults)
-                print(self.heroes.count)
+                //print(self.heroes.count)
                 self.heroTable.reloadData()
                 self.isLoading = false
             case .failure(let error):
