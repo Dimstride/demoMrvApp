@@ -15,11 +15,6 @@ class HeroeCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        heroImage.image = nil
-//    }
-    
     func setHeroe(data: CharacterResult) {
         setImage(heroImage: self.heroImage, data: data)
         nameText.text = data.name
@@ -33,6 +28,5 @@ class HeroeCell: UITableViewCell {
     private func setImage(heroImage: UIImageView, data: CharacterResult) {
         self.heroImage.layer.cornerRadius = 10
         self.heroImage.kf.setImage(with: URL(string: goodURL(url: data.thumbnail?.path, format: data.thumbnail?.thumbExtension)))
-        //print(goodURL(url: data.thumbnail?.path, format: data.thumbnail?.thumbExtension))
     }
 }

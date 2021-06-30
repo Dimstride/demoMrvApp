@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  Marvel SPM
-//
-//  Created by Bip on 21/6/21.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

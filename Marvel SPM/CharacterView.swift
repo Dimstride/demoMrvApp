@@ -35,12 +35,6 @@ class CharacterView: UIViewController {
             } else { descriptionLabel.text = character!.description }
         } else { descriptionLabel.text = "Not description provided" }
         
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .horizontal
-//        comicsCollection.setCollectionViewLayout(layout, animated: true)
-//        seriesCollection.setCollectionViewLayout(layout, animated: true)
-//        eventsCollection.setCollectionViewLayout(layout, animated: true)
-        
         self.comicsCollection?.register(UINib(nibName: comicsCell.xibName, bundle: nil), forCellWithReuseIdentifier: comicsCell.idReuse)
         self.comicsCollection.dataSource = self
         self.comicsCollection.delegate = self
@@ -63,11 +57,10 @@ class CharacterView: UIViewController {
         CharacterClient().getComics(offset: offset, charId: securedId) { result in
             switch result {
             case .success(let comics):
-                //print("Comics Success")
                 guard let securedResults = comics.data?.results else { return }
                 self.comics.append(contentsOf: securedResults)
-                self.comicsCollection.reloadData()
                 print("Comics count \(self.comics.count)")
+                self.comicsCollection.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -76,11 +69,10 @@ class CharacterView: UIViewController {
         CharacterClient().getSeries(offset: offset, charId: securedId) { result in
             switch result {
             case .success(let series):
-                //print("Series Success")
                 guard let securedResults = series.data?.results else { return }
                 self.series.append(contentsOf: securedResults)
-                self.seriesCollection.reloadData()
                 print("Series count \(self.series.count)")
+                self.seriesCollection.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -89,11 +81,10 @@ class CharacterView: UIViewController {
         CharacterClient().getEvents(offset: offset, charId: securedId) { result in
             switch result {
             case .success(let events):
-                //print("Events Success")
                 guard let securedResults = events.data?.results else { return }
                 self.events.append(contentsOf: securedResults)
-                self.eventsCollection.reloadData()
                 print("Events count \(self.events.count)")
+                self.eventsCollection.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -105,9 +96,7 @@ class CharacterView: UIViewController {
 extension CharacterView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.comicsCollection {
-            return comics.count
-        } else
+        if collectionView == self.comicsCollection { return comics.count } else
         if collectionView == self.seriesCollection { return series.count } else
         if collectionView == self.eventsCollection { return events.count }
         return 0

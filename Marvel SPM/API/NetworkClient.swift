@@ -12,14 +12,12 @@ class NetworkClient {
         return Int(Date().timeIntervalSince1970)
     }()
     
-    // Hash API Marvel
-    // (e.g. md5(ts+privateKey+publicKey)
+    // Hash API Marvel: (e.g. md5(ts+privateKey+publicKey)
     
     private lazy var hash: String = {
         return md5Hash("\(timestamp)\(privateKey)\(publicKey)")
     }()
     
-    //func getCharacters(completion: @escaping (CharacterResponse) -> Void){ // For scaping results (old)
     func getCharacters(offset: Int, completion: @escaping (Result<CharacterResponse, NetworkError>) -> Void){
         print(offset)
         AF.request(
@@ -29,28 +27,23 @@ class NetworkClient {
                 "apikey": publicKey,
                 "hash": hash,
                 "ts": timestamp,
-                "limit": 10,
+                "limit": 20,
                 "offset": offset
             ]
         ).validate(statusCode: 200 ..< 299).responseJSON { AFdata in
             guard AFdata.error == nil else {
-                //print("Error: \(AFdata.error?.localizedDescription ?? "")")
                 completion(.failure(.serverError("Error: \(AFdata.error?.localizedDescription ?? "")")))
                 return
             }
             guard let secureData = AFdata.data else {
-                //print("Error in guarding data")
                 completion(.failure(.dataError("Error in guarding data")))
                 return
             }
             
             do {
                 let json = try JSONDecoder().decode(CharacterResponse.self, from: secureData)
-                //print(json.data?.results?[0])
-                //completion(json) // Scaping results
                 completion(.success(json))
             } catch {
-                //print("Error: \(error)")
                 completion(.failure(.serializationError("Error: \(error)")))
                 return
             }

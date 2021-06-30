@@ -35,7 +35,6 @@ class ViewController: UIViewController {
 private extension ViewController {
     
     private func networkSetup() {
-        //self.activityIndicator.startAnimating()
         NetworkClient().getCharacters(offset: offset) { result in
             switch result {
             case .success(let characters):
@@ -43,7 +42,6 @@ private extension ViewController {
                 guard let securedResults = characters.data?.results else { return }
                 self.offset += securedResults.count
                 self.heroes.append(contentsOf: securedResults)
-                //print(self.heroes.count)
                 self.heroTable.reloadData()
                 self.isLoading = false
             case .failure(let error):

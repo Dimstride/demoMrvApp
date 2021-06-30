@@ -6,23 +6,17 @@ class CharacterClient {
     private let publicKey = secPublicKey
     private let privateKey = secPrivateKey
     private let baseUrl = "https://gateway.marvel.com"
-    //private let charactersPath = "/v1/public/characters"
     
     private lazy var timestamp: Int = {
         return Int(Date().timeIntervalSince1970)
     }()
     
-    // Hash API Marvel
-    // (e.g. md5(ts+privateKey+publicKey)
-    
     private lazy var hash: String = {
         return md5Hash("\(timestamp)\(privateKey)\(publicKey)")
     }()
     
-    //func getCharacters(completion: @escaping (CharacterResponse) -> Void){ // For scaping results (old)
     func getComics(offset: Int, charId: Int, completion: @escaping (Result<ComicsResponse, NetworkError>) -> Void){
         let charactersPath = "/v1/public/characters/\(charId)/comics"
-        //print(charactersPath)
         AF.request(
             "\(baseUrl)\(charactersPath)",
             method: .get,
@@ -35,23 +29,18 @@ class CharacterClient {
             ]
         ).validate(statusCode: 200 ..< 299).responseJSON { AFdata in
             guard AFdata.error == nil else {
-                //print("Error: \(AFdata.error?.localizedDescription ?? "")")
                 completion(.failure(.serverError("Error: \(AFdata.error?.localizedDescription ?? "")")))
                 return
             }
             guard let secureData = AFdata.data else {
-                //print("Error in guarding data")
                 completion(.failure(.dataError("Error in guarding data")))
                 return
             }
             
             do {
                 let json = try JSONDecoder().decode(ComicsResponse.self, from: secureData)
-                //print(json.data?.results?[0])
-                //completion(json) // Scaping results
                 completion(.success(json))
             } catch {
-                //print("Error: \(error)")
                 completion(.failure(.serializationError("Error: \(error)")))
                 return
             }
@@ -59,10 +48,9 @@ class CharacterClient {
     }
     
     func getSeries(offset: Int, charId: Int, completion: @escaping (Result<SeriesResponse, NetworkError>) -> Void){
-        let charactersPath = "/v1/public/characters/\(charId)/series"
-        //print(charactersPath)
+        let seriesPath = "/v1/public/characters/\(charId)/series"
         AF.request(
-            "\(baseUrl)\(charactersPath)",
+            "\(baseUrl)\(seriesPath)",
             method: .get,
             parameters: [
                 "apikey": publicKey,
@@ -73,23 +61,18 @@ class CharacterClient {
             ]
         ).validate(statusCode: 200 ..< 299).responseJSON { AFdata in
             guard AFdata.error == nil else {
-                //print("Error: \(AFdata.error?.localizedDescription ?? "")")
                 completion(.failure(.serverError("Error: \(AFdata.error?.localizedDescription ?? "")")))
                 return
             }
             guard let secureData = AFdata.data else {
-                //print("Error in guarding data")
                 completion(.failure(.dataError("Error in guarding data")))
                 return
             }
             
             do {
                 let json = try JSONDecoder().decode(SeriesResponse.self, from: secureData)
-                //print(json.data?.results?[0])
-                //completion(json) // Scaping results
                 completion(.success(json))
             } catch {
-                //print("Error: \(error)")
                 completion(.failure(.serializationError("Error: \(error)")))
                 return
             }
@@ -97,10 +80,9 @@ class CharacterClient {
     }
     
     func getEvents(offset: Int, charId: Int, completion: @escaping (Result<EventsResponse, NetworkError>) -> Void){
-        let charactersPath = "/v1/public/characters/\(charId)/events"
-        //print(charactersPath)
+        let eventsPath = "/v1/public/characters/\(charId)/events"
         AF.request(
-            "\(baseUrl)\(charactersPath)",
+            "\(baseUrl)\(eventsPath)",
             method: .get,
             parameters: [
                 "apikey": publicKey,
@@ -111,23 +93,18 @@ class CharacterClient {
             ]
         ).validate(statusCode: 200 ..< 299).responseJSON { AFdata in
             guard AFdata.error == nil else {
-                //print("Error: \(AFdata.error?.localizedDescription ?? "")")
                 completion(.failure(.serverError("Error: \(AFdata.error?.localizedDescription ?? "")")))
                 return
             }
             guard let secureData = AFdata.data else {
-                //print("Error in guarding data")
                 completion(.failure(.dataError("Error in guarding data")))
                 return
             }
             
             do {
                 let json = try JSONDecoder().decode(EventsResponse.self, from: secureData)
-                //print(json.data?.results?[0])
-                //completion(json) // Scaping results
                 completion(.success(json))
             } catch {
-                //print("Error: \(error)")
                 completion(.failure(.serializationError("Error: \(error)")))
                 return
             }

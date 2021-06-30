@@ -16,6 +16,5 @@ class ComicsCell: UICollectionViewCell {
     private func setImage(comicImage: UIImageView, data: ComicsResult) {
         self.comicThumb.layer.cornerRadius = 5
         self.comicThumb.kf.setImage(with: URL(string: goodURL(url: data.thumbnail?.path, format: data.thumbnail?.thumbnailExtension)))
-        //print(URL(string: goodURL(url: data.thumbnail?.path, format: data.thumbnail?.thumbnailExtension)) ?? "")
     }
 }
